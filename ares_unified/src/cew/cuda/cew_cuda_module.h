@@ -8,8 +8,10 @@
 
 #include "../include/cew_unified_interface.h"
 #include "../include/cew_adaptive_jamming.h"
+#ifdef CEW_CUDA_AVAILABLE
 #include <cuda_runtime.h>
 #include <cufft.h>
+#endif
 
 namespace ares::cew {
 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -march=native -Wl,--dependency-file=CMakeFiles/ares_cew.dir/link.d -shared -Wl,-soname,libares_cew.so -o libares_cew.so CMakeFiles/ares_cew.dir/cew_unified_interface.cpp.o CMakeFiles/ares_cew.dir/cpu/cew_cpu_module.cpp.o  -lpthread -lm

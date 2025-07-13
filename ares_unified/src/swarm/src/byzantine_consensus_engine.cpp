@@ -28,7 +28,9 @@
  */
 
 #include "byzantine_consensus_engine.h"
+#ifdef CEW_CUDA_AVAILABLE
 #include <cuda_runtime.h>
+#endif
 #include <openssl/sha.h>
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>

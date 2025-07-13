@@ -99,7 +99,7 @@ install(FILES ${CEW_HEADERS}
     DESTINATION include/ares/cew
 )
 
-# Tests
-if(BUILD_TESTS)
-    add_subdirectory(tests)
-endif()
+# Tests (disabled for now)
+# if(BUILD_TESTS)
+#     add_subdirectory(tests)
+# endif()

@@ -1,0 +1,12 @@
+=== Code Metrics ===
+Total lines of code:
+  67252 total
+
+Files by type:
+C++ source files: 54
+Header files: 38
+CUDA files: 35
+
+Complexity indicators:
+Classes/Structs: 823
+Templates/Virtual: 226

@@ -4,9 +4,11 @@
  */
 
 #include "include/cew_unified_interface.h"
-#include "cuda/cew_cuda_module.h"
 #include "cpu/cew_cpu_module.h"
+#ifdef CEW_CUDA_AVAILABLE
+#include "cuda/cew_cuda_module.h"
 #include <cuda_runtime.h>
+#endif
 #include <mutex>
 #include <iostream>
 
@@ -19,19 +21,29 @@ std::unique_ptr<ICEWModule> CEWModuleFactory::create(CEWBackend backend) {
             // Try CUDA first, fall back to CPU
             if (is_cuda_available()) {
                 std::cout << "CEW: Using CUDA backend (auto-detected)" << std::endl;
+#ifdef CEW_CUDA_AVAILABLE
                 return std::make_unique<CEWCudaModule>();
+#else
+                std::cout << "CEW: CUDA not compiled in, using CPU backend" << std::endl;
+                return std::make_unique<CEWCpuModule>();
+#endif
             } else {
                 std::cout << "CEW: Using CPU backend (CUDA not available)" << std::endl;
                 return std::make_unique<CEWCpuModule>();
             }
             
         case CEWBackend::CUDA:
+#ifdef CEW_CUDA_AVAILABLE
             if (!is_cuda_available()) {
                 std::cerr << "CEW: CUDA backend requested but not available" << std::endl;
                 return nullptr;
             }
             std::cout << "CEW: Using CUDA backend (forced)" << std::endl;
             return std::make_unique<CEWCudaModule>();
+#else
+            std::cerr << "CEW: CUDA backend requested but not compiled in" << std::endl;
+            return nullptr;
+#endif
             
         case CEWBackend::CPU:
             std::cout << "CEW: Using CPU backend (forced)" << std::endl;
@@ -43,13 +55,18 @@ std::unique_ptr<ICEWModule> CEWModuleFactory::create(CEWBackend backend) {
 }
 
 bool CEWModuleFactory::is_cuda_available() {
+#ifdef CEW_CUDA_AVAILABLE
     int device_count = 0;
     cudaError_t err = cudaGetDeviceCount(&device_count);
     return (err == cudaSuccess && device_count > 0);
+#else
+    return false;
+#endif
 }
 
 std::vector<std::string> CEWModuleFactory::get_cuda_devices() {
     std::vector<std::string> devices;
+#ifdef CEW_CUDA_AVAILABLE
     int device_count = 0;
     
     if (cudaGetDeviceCount(&device_count) != cudaSuccess) {
@@ -65,7 +82,7 @@ std::vector<std::string> CEWModuleFactory::get_cuda_devices() {
             devices.push_back(device_info);
         }
     }
-    
+#endif
     return devices;
 }
 

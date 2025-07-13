@@ -9,7 +9,9 @@
 #ifndef ARES_SWARM_BYZANTINE_CONSENSUS_ENGINE_H
 #define ARES_SWARM_BYZANTINE_CONSENSUS_ENGINE_H
 
+#ifdef CEW_CUDA_AVAILABLE
 #include <cuda_runtime.h>
+#endif
 #include <atomic>
 #include <vector>
 #include <unordered_map>

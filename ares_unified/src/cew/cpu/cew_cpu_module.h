@@ -10,6 +10,10 @@
 #include "../include/cew_adaptive_jamming.h"
 #include <vector>
 #include <mutex>
+#include <queue>
+#include <functional>
+#include <condition_variable>
+#include <atomic>
 #include <random>
 #include <chrono>
 #include <thread>

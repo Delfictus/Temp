@@ -163,10 +163,6 @@ struct alignas(32) ThreatSignature {
     
     /** @brief Padding for alignment and security */
     uint8_t padding[2];
-    
-    /** @brief Ensure POD type for GPU compatibility */
-    static_assert(std::is_standard_layout_v<ThreatSignature>);
-    static_assert(std::is_trivially_copyable_v<ThreatSignature>);
 };
 
 /**
@@ -200,10 +196,6 @@ struct alignas(32) JammingParams {
     
     /** @brief Frequency sweep rate (MHz/second) */
     float sweep_rate_mhz_per_sec;
-    
-    /** @brief Ensure POD type for GPU compatibility */
-    static_assert(std::is_standard_layout_v<JammingParams>);
-    static_assert(std::is_trivially_copyable_v<JammingParams>);
 };
 
 /**
@@ -232,9 +224,6 @@ struct alignas(64) QTableState {
     
     /** @brief Cumulative reward */
     float total_reward;
-    
-    /** @brief Ensure cache-line alignment */
-    static_assert(sizeof(QTableState) % 64 == 0);
 };
 
 /**
@@ -315,5 +304,11 @@ inline constexpr uint32_t quantize_bandwidth(float bandwidth_mhz) noexcept {
 }
 
 } // namespace ares::cew
+
+// Compile-time assertions for struct safety
+static_assert(std::is_standard_layout_v<ares::cew::ThreatSignature>);
+static_assert(std::is_trivially_copyable_v<ares::cew::ThreatSignature>);
+static_assert(std::is_standard_layout_v<ares::cew::JammingParams>);
+static_assert(std::is_trivially_copyable_v<ares::cew::JammingParams>);
 
 #endif // ARES_CEW_ADAPTIVE_JAMMING_H

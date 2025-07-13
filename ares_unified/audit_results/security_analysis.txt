@@ -1,0 +1,384 @@
+=== Security Analysis Report ===
+Generated: Sun Jul 13 05:53:29 UTC 2025
+
+Cryptographic implementations found:
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:41:#include <cryptopp/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:42:#include <cryptopp/aes.h>
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:43:#include <cryptopp/rsa.h>
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:44:#include <cryptopp/osrng.h>
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:45:#include <cryptopp/base64.h>
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:106:    uint8_t abort_code_hash[32];  // SHA-256
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:204:                    secure_rand ^= __brev(secure_rand);  // Bit reversal
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:549:        // Compute abort code hash
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:550:        CryptoPP::SHA256 hash;
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:551:        hash.Update(master_abort_code.data(), master_abort_code.size());
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:552:        hash.Final(h_countdown.abort_code_hash);
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:874:        CryptoPP::SHA256 hash;
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:875:        uint8_t code_hash[32];
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:876:        hash.Update(abort_code.data(), abort_code.size());
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:877:        hash.Final(code_hash);
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:881:            if (code_hash[i] != h_countdown.abort_code_hash[i]) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:29: * Implements CKKS and BGV schemes for encrypted neural network operations
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:212:    // Encryptors and decryptors
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:213:    std::unique_ptr<Encryptor> ckks_encryptor_;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:214:    std::unique_ptr<Decryptor> ckks_decryptor_;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:215:    std::unique_ptr<Encryptor> bgv_encryptor_;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:216:    std::unique_ptr<Decryptor> bgv_decryptor_;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:248:    EncryptedTensor encryptTensor(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:253:        EncryptedTensor encrypted;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:254:        encrypted.shape = shape;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:255:        encrypted.metadata.scheme = scheme;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:258:            encryptCKKSTensor(tensor, encrypted);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:260:            encryptBGVTensor(tensor, encrypted);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:263:        return encrypted;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:266:    thrust::device_vector<float> decryptTensor(const EncryptedTensor& encrypted) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:269:        if (encrypted.metadata.scheme == EncryptionScheme::CKKS) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:270:            decryptCKKSTensor(encrypted, result);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:271:        } else if (encrypted.metadata.scheme == EncryptionScheme::BGV) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:272:            decryptBGVTensor(encrypted, result);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:322:                        if (ckks_decryptor_->invariant_noise_budget(block_sum) < 
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:460:            if (ckks_decryptor_->invariant_noise_budget(result.data[i]) < 
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:593:        ckks_encryptor_ = std::make_unique<Encryptor>(*ckks_context_, ckks_public_key_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:594:        ckks_decryptor_ = std::make_unique<Decryptor>(*ckks_context_, ckks_secret_key_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:613:        bgv_encryptor_ = std::make_unique<Encryptor>(*bgv_context_, bgv_public_key_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:614:        bgv_decryptor_ = std::make_unique<Decryptor>(*bgv_context_, bgv_secret_key_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:625:    void encryptCKKSTensor(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:627:        EncryptedTensor& encrypted
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:633:        encrypted.data.resize(num_ciphertexts);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:634:        encrypted.batch_size = slot_count;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:635:        encrypted.is_packed = true;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:666:            ckks_encryptor_->encrypt(plain, encrypted.data[i]);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:669:        encrypted.metadata.scale = scale;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:670:        encrypted.metadata.level = 0;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:671:        encrypted.metadata.operation_count = 0;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:674:    void decryptCKKSTensor(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:675:        const EncryptedTensor& encrypted,
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:679:        for (auto dim : encrypted.shape) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:684:        thrust::device_vector<thrust::complex<double>> packed_data(encrypted.batch_size);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:687:        for (const auto& ct : encrypted.data) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:689:            ckks_decryptor_->decrypt(ct, plain);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:698:            uint32_t batch_size = std::min(encrypted.batch_size, total_size - offset);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:707:                1.0f / encrypted.metadata.scale
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:716:    void encryptBGVTensor(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:718:        EncryptedTensor& encrypted
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:725:        encrypted.data.resize(num_ciphertexts);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:751:            bgv_encryptor_->encrypt(plain, encrypted.data[i]);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:754:        encrypted.metadata.scale = static_cast<float>(scale_factor);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:757:    void decryptBGVTensor(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:758:        const EncryptedTensor& encrypted,
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:762:        for (auto dim : encrypted.shape) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:770:        for (const auto& ct : encrypted.data) {
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:772:            bgv_decryptor_->decrypt(ct, plain);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:783:                              encrypted.metadata.scale;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/federated_learning_coordinator.cpp:44:#include <cryptopp/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/federated_learning_coordinator.cpp:45:#include <cryptopp/aes.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/federated_learning_coordinator.cpp:46:#include <cryptopp/gcm.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/federated_learning_coordinator.cpp:47:#include <cryptopp/kyber.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/federated_learning_coordinator.cpp:48:#include <cryptopp/dilithium.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/federated_learning_coordinator.cpp:134:    std::array<uint8_t, 64> update_hash;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:42:#include <cryptopp/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:43:#include <cryptopp/aes.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:44:#include <cryptopp/gcm.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:45:#include <cryptopp/integer.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:46:#include <cryptopp/nbtheory.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:47:#include <cryptopp/osrng.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:48:#include <cryptopp/oids.h>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:937:        SHA256 hash;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:938:        hash.Update(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:942:        hash.Update(share.commitment.data(), COMMITMENT_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:943:        hash.Final(share.commitment.data());
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:951:        SHA256 hash;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:952:        hash.Update(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:956:        hash.Update(commitment.randomness.data(), 32);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/secure_multiparty_computation.cpp:959:        hash.Final(computed.data());
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:122:    std::array<uint8_t, 32> frame_hash;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/include/federated_learning_unified_interface.h:10:// Unified federated learning interface with homomorphic encryption
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/include/federated_learning_unified_interface.h:51:    EncryptedTensor encryptTensor(const std::vector<float>& plaintext);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/include/federated_learning_unified_interface.h:52:    std::vector<float> decryptTensor(const EncryptedTensor& ciphertext);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/include/federated_learning_unified_interface.h:103:    std::string encryptionScheme = "CKKS";  // or "BFV", "BGV"
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/include/federated_learning_unified_interface.h:137:    std::string encryptionScheme;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/include/federated_learning_unified_interface.h:142:    float encryptedLoss;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:43:#include <cryptopp/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:44:#include <cryptopp/aes.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:45:#include <cryptopp/gcm.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:46:#include <cryptopp/ecdsa.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:47:#include <cryptopp/osrng.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:48:#include <cryptopp/base64.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:114:    std::array<uint8_t, 32> identity_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:157:    std::vector<uint8_t> private_key_encrypted;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:180:    std::array<uint8_t, 32> previous_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:181:    std::array<uint8_t, 32> current_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:240:    const uint8_t* credential_hashes,
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:266:    // Verify credential hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:267:    uint32_t hash = 0xDEADBEEF;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:269:        hash ^= identity.credentials[i];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:270:        hash = (hash << 1) | (hash >> 31);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:273:    uint32_t expected_hash = ((uint32_t*)credential_hashes)[idx];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:274:    if (hash != expected_hash) {
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:318:        // Update identity hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:319:        uint32_t new_hash = 0x12345678;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:321:            new_hash ^= identity.public_key[i];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:322:            new_hash = (new_hash * 31) + i;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:326:            identity.identity_hash[i] = (new_hash >> (i % 4) * 8) & 0xFF;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:391:        // Include from identity hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:392:        data = from_identity->identity_hash[tid];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:394:        // Include to identity hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:395:        data = to_identity->identity_hash[tid - 32];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:417:    thrust::device_vector<uint8_t> d_credential_hashes;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:455:    std::array<uint8_t, 32> ledger_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:640:        uint8_t hash[32];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:642:        sha.Final(hash);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:644:        // Compare first 4 bytes of hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:645:        uint32_t computed_hash = *((uint32_t*)hash);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:646:        uint32_t stored_hash = *((uint32_t*)identity.identity_hash.data());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:648:        return (computed_hash == stored_hash);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:766:        entry.previous_hash = ledger_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:770:        // Compute new hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:774:        sha.Update(entry.previous_hash.data(), 32);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:776:        sha.Final(entry.current_hash.data());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:783:        ledger_hash = entry.current_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:798:        d_credential_hashes.resize(MAX_IDENTITIES * 4);  // 32-bit hashes
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:811:        std::fill(ledger_hash.begin(), ledger_hash.end(), 0);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:861:        // Compute identity hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:865:        sha.Final(registered.identity_hash.data());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:986:                entry.private_key_encrypted.resize(256);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hot_swap_identity_manager.cpp:987:                rng.GenerateBlock(entry.private_key_encrypted.data(), 256);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:42:#include <cryptopp/rsa.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:43:#include <cryptopp/ecdsa.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:44:#include <cryptopp/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:45:#include <cryptopp/aes.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:46:#include <cryptopp/gcm.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:47:#include <cryptopp/osrng.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:48:#include <cryptopp/base64.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:49:#include <cryptopp/hex.h>
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:113:    std::array<uint8_t, 32> firmware_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:126:    std::array<uint8_t, 32> master_key_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:127:    std::array<uint8_t, 32> attestation_key_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:150:    std::array<uint8_t, 20> ek_public_hash;  // Endorsement Key
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:151:    std::array<uint8_t, 20> srk_public_hash; // Storage Root Key
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:152:    std::array<uint8_t, 20> aik_public_hash; // Attestation Identity Key
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:178:    std::array<uint8_t, IDENTITY_HASH_SIZE> platform_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:193:__global__ void compute_hardware_hash(
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:196:    uint8_t* hashes,
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:205:    // Simplified hash computation (would use proper crypto in production)
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:206:    uint32_t hash_data[16];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:209:    hash_data[0] = comp.component_id;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:210:    hash_data[1] = (uint32_t)comp.type;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:211:    hash_data[2] = comp.revision;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:212:    hash_data[3] = comp.capabilities & 0xFFFFFFFF;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:213:    hash_data[4] = (comp.capabilities >> 32) & 0xFFFFFFFF;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:217:        hash_data[5 + i] = ((uint32_t*)comp.serial_number.data())[i];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:220:    // Include firmware hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:221:    hash_data[13] = ((uint32_t*)comp.firmware_hash.data())[0];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:222:    hash_data[14] = ((uint32_t*)comp.vendor_id.data())[0];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:225:    hash_data[15] = salt_length > 0 ? ((uint32_t*)salt)[0] : 0;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:227:    // Simple hash function (replace with SHA-256 in production)
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:228:    uint32_t hash = 0x811C9DC5;  // FNV offset basis
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:230:        hash ^= hash_data[i];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:231:        hash *= 0x01000193;  // FNV prime
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:234:    // Store hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:236:        ((uint32_t*)&hashes[idx * IDENTITY_HASH_SIZE])[i] = hash + i;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:264:                // Simplified signature verification (use proper crypto in production)
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:343:            quote[offset++] = se_state->attestation_key_hash[i];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:347:        uint32_t sig_hash = 0x12345678;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:349:            sig_hash ^= quote[i];
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:350:            sig_hash = (sig_hash << 1) | (sig_hash >> 31);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:355:            quote[offset++] = (sig_hash >> (i % 4) * 8) & 0xFF;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:364:    const uint8_t* expected_hashes,
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:365:    const uint8_t* current_hashes,
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:375:    // Compare hashes
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:378:        if (expected_hashes[idx * IDENTITY_HASH_SIZE + i] != 
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:379:            current_hashes[idx * IDENTITY_HASH_SIZE + i]) {
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:421:    thrust::device_vector<uint8_t> d_component_hashes;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:422:    thrust::device_vector<uint8_t> d_expected_hashes;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:460:    // Initialize cryptographic keys
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:461:    void initialize_crypto() {
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:476:        rng.GenerateBlock(tpm_interface->ek_public_hash.data(), 20);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:477:        rng.GenerateBlock(tpm_interface->srk_public_hash.data(), 20);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:478:        rng.GenerateBlock(tpm_interface->aik_public_hash.data(), 20);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:526:        // Compute current hashes
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:532:        compute_hardware_hash<<<grid, block, 0, attestation_stream>>>(
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:535:            thrust::raw_pointer_cast(d_component_hashes.data()),
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:560:            // Get component hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:561:            std::vector<uint8_t> h_hash(IDENTITY_HASH_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:565:            CUDA_CHECK(cudaMemcpy(h_hash.data(),
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:566:                                 thrust::raw_pointer_cast(d_component_hashes.data()) + 
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:571:            std::copy(h_hash.begin(), h_hash.end(), evidence.measurement.begin());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:662:            thrust::raw_pointer_cast(d_expected_hashes.data()),
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:663:            thrust::raw_pointer_cast(d_component_hashes.data()),
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:769:        d_component_hashes.resize(MAX_HARDWARE_COMPONENTS * IDENTITY_HASH_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:770:        d_expected_hashes.resize(MAX_HARDWARE_COMPONENTS * IDENTITY_HASH_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:778:        // Initialize cryptography
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:779:        initialize_crypto();
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:787:            rng.GenerateBlock(secure_elements[i].master_key_hash.data(), 32);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:788:            rng.GenerateBlock(secure_elements[i].attestation_key_hash.data(), 32);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:851:        // Store expected hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:852:        std::vector<uint8_t> hash(IDENTITY_HASH_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:853:        compute_component_hash(registered, hash);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:857:            thrust::raw_pointer_cast(d_expected_hashes.data()) + idx * IDENTITY_HASH_SIZE,
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:858:            hash.data(), IDENTITY_HASH_SIZE,
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:893:        compute_component_hash(comp_it->second, measurement);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:910:        // Generate platform hash
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:913:        sha.Final(result.platform_hash.data());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:976:        std::array<uint8_t, 32> key_hash;
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:978:        sha.Final(key_hash.data());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:980:        if (key_hash == se.master_key_hash) {
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:1058:    void compute_component_hash(const HardwareComponent& component, 
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:1059:                               std::vector<uint8_t>& hash) {
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:1065:        sha.Update(component.firmware_hash.data(), component.firmware_hash.size());
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:1070:        hash.resize(IDENTITY_HASH_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/identity/src/hardware_attestation_system.cpp:1071:        sha.Final(hash.data());
+/home/runner/work/AE/AE/ares_unified/src/neuromorphic/mlir/brian2_integration.cpp:40:        double E_L = -70.6;        // mV - leak reversal potential
+/home/runner/work/AE/AE/ares_unified/src/neuromorphic/mlir/brian2_integration.cpp:67:    // Synaptic reversal potentials
+/home/runner/work/AE/AE/ares_unified/src/neuromorphic/include/neuromorphic_core.h:55:    double E_L = -70.6;        // mV - leak reversal
+/home/runner/work/AE/AE/ares_unified/src/cyber_em/src/protocol_exploitation_engine.cpp:93:    CRYPTOGRAPHIC_FAULT = 7      // Induce crypto faults
+/home/runner/work/AE/AE/ares_unified/src/digital_twin/src/predictive_simulation_engine.cpp:771:                scenario.description = "Adversarial scenario " + std::to_string(i);
+/home/runner/work/AE/AE/ares_unified/src/digital_twin/src/predictive_simulation_engine.cpp:772:                // Add adversarial forces
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:261:    // Compute digest (stub - would use real hash)
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:309:            wifi_net.is_encrypted = true;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:488:    const std::vector<uint64_t>& encrypted_a,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:489:    const std::vector<uint64_t>& encrypted_b,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:490:    std::vector<uint64_t>& encrypted_c,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:496:    cudaMalloc(&d_a, encrypted_a.size() * sizeof(uint64_t));
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:497:    cudaMalloc(&d_b, encrypted_b.size() * sizeof(uint64_t));
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:501:    cudaMemcpy(d_a, encrypted_a.data(), encrypted_a.size() * sizeof(uint64_t), 
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:503:    cudaMemcpy(d_b, encrypted_b.data(), encrypted_b.size() * sizeof(uint64_t), 
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:515:    encrypted_c.resize(m * n);
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:516:    cudaMemcpy(encrypted_c.data(), d_c, m * n * sizeof(uint64_t), 
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:525:    encrypted_c.resize(m * n);
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:532:                sum = (sum + encrypted_a[i * k + l] * encrypted_b[l * n + j]) % modulus;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core_impl.cpp:534:            encrypted_c[i * n + j] = sum;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:216:    uint64_t* encrypted_a,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:217:    uint64_t* encrypted_b,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:218:    uint64_t* encrypted_c,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:238:                encrypted_a[row * k + tile * blockDim.x + threadIdx.x];
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:245:                encrypted_b[(tile * blockDim.y + threadIdx.y) * n + col];
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:269:        encrypted_c[row * n + col] = sum;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:275:    uint64_t* encrypted_a,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:276:    uint64_t* encrypted_b,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:277:    uint64_t* encrypted_c,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:287:                sum = (sum + encrypted_a[i * k + l] * encrypted_b[l * n + j]) % modulus;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:289:            encrypted_c[i * n + j] = sum;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:367:        // Compute digest (stub - would use real hash)
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:477:        bool is_encrypted;
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:770:    void performHomomorphicMatMul(const std::vector<uint64_t>& encrypted_a,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:771:                                 const std::vector<uint64_t>& encrypted_b,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:772:                                 std::vector<uint64_t>& encrypted_c,
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:776:        cudaMalloc(&d_a, encrypted_a.size() * sizeof(uint64_t));
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:777:        cudaMalloc(&d_b, encrypted_b.size() * sizeof(uint64_t));
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:781:        cudaMemcpy(d_a, encrypted_a.data(), encrypted_a.size() * sizeof(uint64_t), cudaMemcpyHostToDevice);
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:782:        cudaMemcpy(d_b, encrypted_b.data(), encrypted_b.size() * sizeof(uint64_t), cudaMemcpyHostToDevice);
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:802:        encrypted_c.resize(m * n);
+/home/runner/work/AE/AE/ares_unified/src/core/cpu/quantum_resilient_core.cpp:803:        cudaMemcpy(encrypted_c.data(), d_c, m * n * sizeof(uint64_t), cudaMemcpyDeviceToHost);
+/home/runner/work/AE/AE/ares_unified/src/core/include/ares_core.h:88:    bool enable_post_quantum_crypto = true;
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:112:        bool is_encrypted;
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:155:    void performHomomorphicMatMul(const std::vector<uint64_t>& encrypted_a,
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:156:                                 const std::vector<uint64_t>& encrypted_b,
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:157:                                 std::vector<uint64_t>& encrypted_c,
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:187:        uint64_t* encrypted_a,
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:188:        uint64_t* encrypted_b,
+/home/runner/work/AE/AE/ares_unified/src/core/include/quantum_resilient_core.h:189:        uint64_t* encrypted_c,
+/home/runner/work/AE/AE/ares_unified/src/core/include/neuromorphic_core.h:55:    double E_L = -70.6;        // mV - leak reversal
+/home/runner/work/AE/AE/ares_unified/src/core/include/core_utils.h:82:     * @brief Generate cryptographically secure random bytes
+/home/runner/work/AE/AE/ares_unified/src/core/include/core_utils.h:87:     * @brief Compute SHA-256 hash
+/home/runner/work/AE/AE/ares_unified/src/core/include/core_utils.h:92:     * @brief Compute SHA-3 hash
+/home/runner/work/AE/AE/ares_unified/src/unreal/ARESEdgePlugin/Source/ARESEdgePlugin/Private/ARESGameMode_Optimized.cpp:568:                    NetworkInfo.bIsEncrypted = net.encrypted;
+/home/runner/work/AE/AE/ares_unified/src/unreal/ARESEdgePlugin/Source/ARESEdgePlugin/Private/ARESGameMode_Optimized.cpp:593:    network.encrypted = NetworkInfo.bIsEncrypted;
+/home/runner/work/AE/AE/ares_unified/src/unreal/ARESEdgePlugin/Source/ARESEdgePlugin/Private/unreal_v2/ARESGameMode_Optimized.cpp:568:                    NetworkInfo.bIsEncrypted = net.encrypted;
+/home/runner/work/AE/AE/ares_unified/src/unreal/ARESEdgePlugin/Source/ARESEdgePlugin/Private/unreal_v2/ARESGameMode_Optimized.cpp:593:    network.encrypted = NetworkInfo.bIsEncrypted;
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:32:#include <openssl/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:33:#include <openssl/ec.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:34:#include <openssl/ecdsa.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:35:#include <openssl/evp.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:50:        ss << std::hex << std::setw(2) << std::setfill('0') << (int)digest.hash[i];
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:102:    SHA256_Final(digest.hash, &sha256);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:211:    memset(&crypto_gpu_, 0, sizeof(crypto_gpu_));
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:227:    if (crypto_gpu_.d_signatures) cudaFree(crypto_gpu_.d_signatures);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:228:    if (crypto_gpu_.d_digests) cudaFree(crypto_gpu_.d_digests);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:229:    if (crypto_gpu_.d_verify_results) cudaFree(crypto_gpu_.d_verify_results);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:230:    if (crypto_gpu_.crypto_stream) cudaStreamDestroy(crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:235:    const char* crypto_key_file
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:239:    // Initialize GPU crypto resources
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:242:    err = cudaStreamCreate(&crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:245:    // Allocate GPU memory for batch crypto operations
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:247:    err = cudaMalloc(&crypto_gpu_.d_signatures, batch_size * CRYPTO_SIGNATURE_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:250:    err = cudaMalloc(&crypto_gpu_.d_digests, batch_size * 32);  // SHA-256
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:253:    err = cudaMalloc(&crypto_gpu_.d_verify_results, batch_size * sizeof(bool));
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:581:    SHA256_Final(digest.hash, &sha256);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:590:    memcpy(sig.data, digest.hash, 32);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:604:    return memcmp(sig.data, digest.hash, 32) == 0;
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:842:    cudaMemcpyAsync(crypto_gpu_.d_signatures, signatures, 
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:844:                    cudaMemcpyHostToDevice, crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:846:    cudaMemcpyAsync(crypto_gpu_.d_digests, digests, 
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:848:                    cudaMemcpyHostToDevice, crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:855:    // crypto_kernels::batch_ecdsa_verify_kernel<<<grid_size, block_size, 0, crypto_gpu_.crypto_stream>>>(...)
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:858:    cudaMemcpyAsync(results, crypto_gpu_.d_verify_results, 
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:860:                    cudaMemcpyDeviceToHost, crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/swarm_cpp_impl/byzantine_consensus_engine.cpp:862:    return cudaStreamSynchronize(crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:34:#include <openssl/sha.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:35:#include <openssl/ec.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:36:#include <openssl/ecdsa.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:37:#include <openssl/evp.h>
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:52:        ss << std::hex << std::setw(2) << std::setfill('0') << (int)digest.hash[i];
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:104:    SHA256_Final(digest.hash, &sha256);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:213:    memset(&crypto_gpu_, 0, sizeof(crypto_gpu_));
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:229:    if (crypto_gpu_.d_signatures) cudaFree(crypto_gpu_.d_signatures);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:230:    if (crypto_gpu_.d_digests) cudaFree(crypto_gpu_.d_digests);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:231:    if (crypto_gpu_.d_verify_results) cudaFree(crypto_gpu_.d_verify_results);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:232:    if (crypto_gpu_.crypto_stream) cudaStreamDestroy(crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:237:    const char* crypto_key_file
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:241:    // Initialize GPU crypto resources
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:244:    err = cudaStreamCreate(&crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:247:    // Allocate GPU memory for batch crypto operations
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:249:    err = cudaMalloc(&crypto_gpu_.d_signatures, batch_size * CRYPTO_SIGNATURE_SIZE);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:252:    err = cudaMalloc(&crypto_gpu_.d_digests, batch_size * 32);  // SHA-256
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:255:    err = cudaMalloc(&crypto_gpu_.d_verify_results, batch_size * sizeof(bool));
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:583:    SHA256_Final(digest.hash, &sha256);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:592:    memcpy(sig.data, digest.hash, 32);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:606:    return memcmp(sig.data, digest.hash, 32) == 0;
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:844:    cudaMemcpyAsync(crypto_gpu_.d_signatures, signatures, 
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:846:                    cudaMemcpyHostToDevice, crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:848:    cudaMemcpyAsync(crypto_gpu_.d_digests, digests, 
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:850:                    cudaMemcpyHostToDevice, crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:857:    // crypto_kernels::batch_ecdsa_verify_kernel<<<grid_size, block_size, 0, crypto_gpu_.crypto_stream>>>(...)
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:860:    cudaMemcpyAsync(results, crypto_gpu_.d_verify_results, 
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:862:                    cudaMemcpyDeviceToHost, crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/src/byzantine_consensus_engine.cpp:864:    return cudaStreamSynchronize(crypto_gpu_.crypto_stream);
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/distributed_task_auction.h:153:    uint8_t commitment_hash[32];        // SHA-256 of bid details
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:79:    uint8_t hash[32];  // SHA-256
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:82:        return memcmp(hash, other.hash, 32) == 0;
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:186:        const char* crypto_key_file = nullptr
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:221:    // GPU acceleration for crypto operations
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:275:    // GPU resources for crypto
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:280:        cudaStream_t crypto_stream;
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:281:    } crypto_gpu_;
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:321:// GPU Kernels for cryptographic operations
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:322:namespace crypto_kernels {
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:331:__global__ void batch_ecdsa_verify_kernel(
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:340:    const uint8_t* leaf_hashes,
+/home/runner/work/AE/AE/ares_unified/src/swarm/include/byzantine_consensus_engine.h:345:} // namespace crypto_kernels
+/home/runner/work/AE/AE/ares_unified/src/orchestrator/src/orchestrator_cpp_impl/drpp_chronopath_engine.cpp:556:        size_t prompt_hash = std::hash<std::string>{}(prompt);
+/home/runner/work/AE/AE/ares_unified/src/orchestrator/src/orchestrator_cpp_impl/drpp_chronopath_engine.cpp:559:            auto it = response_cache_.find(prompt_hash);
+/home/runner/work/AE/AE/ares_unified/src/orchestrator/src/orchestrator_cpp_impl/drpp_chronopath_engine.cpp:609:            response_cache_[prompt_hash] = entry;
+
+Memory management patterns:
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/countermeasures_cpp/self_destruct_protocol.cpp:428:            memcpy(h_auth_state.auth_keys[i], auth_keys[i].data(), AUTH_KEY_SIZE / 8);
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/chaos_induction_engine_stub.cpp:21:    d_targets_ = new Impl(device_id, max_targets);
+/home/runner/work/AE/AE/ares_unified/src/countermeasures/src/chaos_induction_engine_stub.cpp:34:    delete static_cast<Impl*>(d_targets_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:244:        delete ckks_keygen_;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:245:        delete bgv_keygen_;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:577:        ckks_keygen_ = new KeyGenerator(*ckks_context_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:605:        bgv_keygen_ = new KeyGenerator(*bgv_context_);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:857:            std::vector<Ciphertext> new_values;
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:880:                    new_values.push_back(sum);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:882:                    new_values.push_back(pool_values[i]);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/homomorphic_computation_engine.cpp:886:            pool_values = std::move(new_values);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:475:        // Check if new keyframe is needed
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:506:            new pcl::PointCloud<pcl::PointXYZRGB>
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:543:                    // Add new keyframe
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:552:            // Create new segment
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:553:            auto new_segment = std::make_unique<MapSegment>(remote_segment);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:554:            map_segments_[new_segment->segment_id] = std::move(new_segment);
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:591:        auto algorithm = new g2o::OptimizationAlgorithmLevenberg(
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:668:        auto vertex = new g2o::VertexSE3();
+/home/runner/work/AE/AE/ares_unified/src/federated_learning/src/distributed_slam_engine.cpp:685:            auto edge = new g2o::EdgeSE3();

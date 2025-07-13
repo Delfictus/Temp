@@ -65,12 +65,16 @@ target_include_directories(ares_neuromorphic
 # Dependencies
 target_link_libraries(ares_neuromorphic
     PUBLIC
-        ares_core
-        Eigen3::Eigen
         Threads::Threads
     PRIVATE
         ${CUDA_LIBRARIES}
 )
+
+# Optional Eigen3 support
+if(TARGET Eigen3::Eigen)
+    target_link_libraries(ares_neuromorphic PUBLIC Eigen3::Eigen)
+    target_compile_definitions(ares_neuromorphic PUBLIC ARES_HAS_EIGEN3)
+endif()
 
 # Python bindings (optional)
 if(BUILD_PYTHON_BINDINGS)

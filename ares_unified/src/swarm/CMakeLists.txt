@@ -37,12 +37,16 @@ target_include_directories(ares_swarm
 # Dependencies
 target_link_libraries(ares_swarm
     PUBLIC
-        ares_core
-        Eigen3::Eigen
         Threads::Threads
     PRIVATE
         ${CUDA_LIBRARIES}
 )
+
+# Optional Eigen3 support
+if(TARGET Eigen3::Eigen)
+    target_link_libraries(ares_swarm PUBLIC Eigen3::Eigen)
+    target_compile_definitions(ares_swarm PUBLIC ARES_HAS_EIGEN3)
+endif()
 
 # C++20 standard
 target_compile_features(ares_swarm PUBLIC cxx_std_20)

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -march=native -Wl,--dependency-file=CMakeFiles/test_cew_unit.dir/link.d CMakeFiles/test_cew_unit.dir/test_cew_basic.cpp.o CMakeFiles/test_cew_unit.dir/test_cew_performance.cpp.o CMakeFiles/test_cew_unit.dir/test_cew_security.cpp.o -o test_cew_unit  -Wl,-rpath,/home/runner/work/AE/AE/ares_unified/build/src/cew ../../src/cew/libares_cew.so -lpthread
