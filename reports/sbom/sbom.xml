@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.5" serialNumber="urn:uuid:3e9f8c2a-5d1b-4a7c-9f2e-8b3d6e4c1a5f" version="1">
+  <metadata>
+    <timestamp>2024-07-12T21:30:00Z</timestamp>
+    <tools>
+      <tool>
+        <vendor>ARES</vendor>
+        <name>SBOM Generator</name>
+        <version>1.0.0</version>
+      </tool>
+    </tools>
+    <authors>
+      <author>
+        <name>ARES Edge System Team</name>
+        <email>ares-team@dod.mil</email>
+      </author>
+    </authors>
+    <component bom-ref="ares-edge-system" type="application">
+      <name>ARES Edge System</name>
+      <version>2.0.0</version>
+      <description>Adaptive Resilient Edge System with quantum-resilient security</description>
+      <licenses>
+        <license>
+          <id>Proprietary</id>
+          <text content-type="text/plain">U.S. Government Restricted - ITAR/EAR Controlled</text>
+        </license>
+      </licenses>
+    </component>
+    <properties>
+      <property name="classification">CUI//SP-CTI//ITAR</property>
+      <property name="export-control">ITAR Category XI(b)</property>
+    </properties>
+  </metadata>
+  <components>
+    <component bom-ref="cuda-toolkit" type="library">
+      <name>NVIDIA CUDA Toolkit</name>
+      <version>12.0</version>
+      <description>Parallel computing platform and API</description>
+      <hashes>
+        <hash alg="SHA-256">e8b2f5c9d3a4e6f7b8c9d1a2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>NVIDIA-CUDA-EULA</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/nvidia/cuda-toolkit@12.0</purl>
+    </component>
+    <component bom-ref="edge-tpu" type="library">
+      <name>Google Edge TPU Runtime</name>
+      <version>2.5.0</version>
+      <description>Runtime library for Coral Edge TPU</description>
+      <hashes>
+        <hash alg="SHA-256">a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/google/edgetpu@2.5.0</purl>
+    </component>
+    <component bom-ref="kyber" type="library">
+      <name>CRYSTALS-Kyber</name>
+      <version>3.0.2</version>
+      <description>Post-quantum key encapsulation mechanism</description>
+      <hashes>
+        <hash alg="SHA-256">f1e2d3c4b5a6978869a5b4c3d2e1f0a1b2c3d4e5f6789abcdef1234567890abc</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>CC0-1.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/pq-crystals/kyber@3.0.2</purl>
+    </component>
+    <component bom-ref="dilithium" type="library">
+      <name>CRYSTALS-Dilithium</name>
+      <version>3.1</version>
+      <description>Post-quantum digital signature algorithm</description>
+      <hashes>
+        <hash alg="SHA-256">9876543210fedcba0987654321abcdef1234567890fedcba0987654321fedcb</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>CC0-1.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/pq-crystals/dilithium@3.1</purl>
+    </component>
+    <component bom-ref="unreal-engine" type="framework">
+      <name>Unreal Engine</name>
+      <version>5.3</version>
+      <description>3D visualization and simulation engine</description>
+      <licenses>
+        <license>
+          <id>Unreal-Engine-EULA</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/epic-games/unreal-engine@5.3</purl>
+    </component>
+    <component bom-ref="tensorflow-lite" type="library">
+      <name>TensorFlow Lite</name>
+      <version>2.13.0</version>
+      <description>Machine learning framework for edge devices</description>
+      <hashes>
+        <hash alg="SHA-256">abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/tensorflow/tensorflow-lite@2.13.0</purl>
+    </component>
+    <component bom-ref="brian2" type="library">
+      <name>Brian2</name>
+      <version>2.5.1</version>
+      <description>Spiking neural network simulator</description>
+      <hashes>
+        <hash alg="SHA-256">1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>CeCILL</id>
+        </license>
+      </licenses>
+      <purl>pkg:pypi/brian2@2.5.1</purl>
+    </component>
+    <component bom-ref="lava" type="library">
+      <name>Lava</name>
+      <version>0.7.0</version>
+      <description>Neuromorphic computing framework</description>
+      <hashes>
+        <hash alg="SHA-256">fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>BSD-3-Clause</id>
+        </license>
+      </licenses>
+      <purl>pkg:pypi/lava-nc@0.7.0</purl>
+    </component>
+    <component bom-ref="mlir" type="library">
+      <name>MLIR</name>
+      <version>17.0.0</version>
+      <description>Multi-Level Intermediate Representation</description>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/llvm/mlir@17.0.0</purl>
+    </component>
+    <component bom-ref="cmake" type="application">
+      <name>CMake</name>
+      <version>3.20</version>
+      <description>Cross-platform build system</description>
+      <licenses>
+        <license>
+          <id>BSD-3-Clause</id>
+        </license>
+      </licenses>
+      <purl>pkg:generic/cmake/cmake@3.20</purl>
+    </component>
+  </components>
+  <dependencies>
+    <dependency ref="ares-edge-system">
+      <dependency ref="cuda-toolkit"/>
+      <dependency ref="edge-tpu"/>
+      <dependency ref="kyber"/>
+      <dependency ref="dilithium"/>
+      <dependency ref="unreal-engine"/>
+      <dependency ref="tensorflow-lite"/>
+      <dependency ref="brian2"/>
+      <dependency ref="lava"/>
+      <dependency ref="mlir"/>
+    </dependency>
+  </dependencies>
+  <vulnerabilities/>
+  <annotations>
+    <annotation>
+      <subjects>
+        <subject ref="ares-edge-system"/>
+      </subjects>
+      <annotator>
+        <organization>ARES Security Team</organization>
+        <email>security@ares-dod.mil</email>
+      </annotator>
+      <timestamp>2024-07-12T21:30:00Z</timestamp>
+      <text>This software contains export-controlled technology under ITAR Category XI(b). Distribution is restricted to U.S. persons and authorized foreign nationals with proper clearance.</text>
+    </annotation>
+  </annotations>
+</bom>

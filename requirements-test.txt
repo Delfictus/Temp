@@ -1,0 +1,56 @@
+# ARES Edge System - Test Requirements
+# Codename: IRONRECON
+
+# Core testing framework
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-xdist==3.5.0
+pytest-timeout==2.2.0
+pytest-asyncio==0.21.1
+pytest-benchmark==4.0.0
+pytest-mock==3.12.0
+
+# Code quality and security
+bandit[toml]==1.7.5
+semgrep==1.45.0
+safety==2.3.5
+flake8==6.1.0
+black==23.11.0
+isort==5.12.0
+mypy==1.7.1
+pylint==3.0.3
+
+# Coverage and reporting
+coverage[toml]==7.3.2
+pytest-html==4.1.1
+pytest-json-report==1.5.0
+
+# SBOM generation
+cyclonedx-bom==4.0.0
+
+# Testing utilities
+hypothesis==6.92.1
+faker==20.1.0
+factory-boy==3.3.0
+
+# Performance testing
+locust==2.17.0
+memory-profiler==0.61.0
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+
+# Additional testing tools
+responses==0.24.1  # Mock HTTP responses
+freezegun==1.3.1   # Time mocking
+testfixtures==7.2.0  # Test fixtures
+
+# CI/CD tools
+tox==4.11.4
+pre-commit==3.5.0
+
+# Development dependencies
+ipython==8.18.1
+ipdb==0.13.13
+jupyterlab==4.0.9

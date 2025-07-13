@@ -1,0 +1,146 @@
+# ARES Edge System Security Audit Configuration
+# Classification: CUI//SP-CTI
+# ITAR Controlled - Export Restricted
+
+audit:
+  name: "ARES Security Audit"
+  version: "1.0.0"
+  classification: "CUI//SP-CTI//ITAR"
+  
+scanners:
+  static_analysis:
+    cpp:
+      - tool: "cppcheck"
+        config:
+          enable: "all"
+          inconclusive: true
+          force: true
+          std: "c++20"
+          suppress:
+            - "missingInclude"
+          custom_rules:
+            - rule: "crypto_validation"
+              pattern: "AES|RSA|SHA"
+              message: "Ensure using quantum-resistant algorithms"
+              severity: "warning"
+            
+      - tool: "clang-tidy"
+        checks:
+          - "cert-*"
+          - "cppcoreguidelines-*"
+          - "modernize-*"
+          - "performance-*"
+          - "readability-*"
+          - "-readability-magic-numbers"
+          
+    python:
+      - tool: "bandit"
+        config:
+          skips: []
+          tests:
+            - B201  # flask_debug_true
+            - B301  # pickle usage
+            - B302  # marshal usage
+            - B303  # md5 usage
+            - B304  # des usage
+            - B305  # cipher usage
+            - B306  # mktemp usage
+            - B307  # eval usage
+            - B601  # paramiko calls
+            - B602  # subprocess shell=True
+          severity: "medium"
+          confidence: "medium"
+          
+  dependency_check:
+    - tool: "safety"
+      config:
+        db: "/opt/safety-db"
+        
+    - tool: "pip-audit"
+      config:
+        vulnerability_service: "osv"
+        
+  secret_scanning:
+    - tool: "trufflehog"
+      config:
+        regex_rules:
+          - name: "Private Key"
+            pattern: "-----BEGIN (RSA|EC|DSA) PRIVATE KEY-----"
+          - name: "AWS Access Key"
+            pattern: "AKIA[0-9A-Z]{16}"
+          - name: "Generic Secret"
+            pattern: "(api[_-]?key|secret|password)\\s*[:=]\\s*['\"][^'\"]{16,}['\"]"
+            
+  compliance_checks:
+    itar:
+      - check: "export_statements"
+        description: "Verify ITAR export control statements"
+        files: ["*.cpp", "*.h", "*.py", "*.md"]
+        required_text: "ITAR"
+        
+      - check: "classification_markings"
+        description: "Verify CUI markings"
+        files: ["*.md", "README*"]
+        required_text: "CUI"
+        
+    nist_800_171:
+      - check: "access_control"
+        control: "3.1.1"
+        description: "Limit system access to authorized users"
+        
+      - check: "encryption_at_rest"
+        control: "3.13.16"
+        description: "Protect CUI at rest"
+        
+      - check: "audit_logging"
+        control: "3.3.1"
+        description: "Create audit records"
+        
+security_rules:
+  critical:
+    - id: "SEC-001"
+      name: "Hardcoded Credentials"
+      pattern: "(password|passwd|pwd|secret|key)\\s*=\\s*[\"'][^\"']+[\"']"
+      exclude_pattern: "(example|sample|test|dummy)"
+      message: "Potential hardcoded credential detected"
+      
+    - id: "SEC-002"
+      name: "Weak Cryptography"
+      pattern: "(MD5|SHA1|DES|RC4)"
+      message: "Weak cryptographic algorithm detected"
+      
+    - id: "SEC-003"
+      name: "Command Injection"
+      pattern: "system\\(|exec\\(|popen\\("
+      message: "Potential command injection vulnerability"
+      
+  high:
+    - id: "SEC-004"
+      name: "Buffer Overflow"
+      pattern: "strcpy|strcat|sprintf|gets"
+      message: "Unsafe string operation detected"
+      
+    - id: "SEC-005"
+      name: "Race Condition"
+      pattern: "access\\(.*\\)|stat\\(.*\\).*open\\("
+      message: "Potential TOCTOU race condition"
+      
+  medium:
+    - id: "SEC-006"
+      name: "Information Disclosure"
+      pattern: "printStackTrace|console\\.log.*password"
+      message: "Potential information disclosure"
+      
+output:
+  format: "markdown"
+  file: "security/audit_report.md"
+  include_remediation: true
+  include_compliance_mapping: true
+  
+thresholds:
+  fail_on:
+    critical: 1
+    high: 5
+    medium: 10
+  warn_on:
+    low: 20

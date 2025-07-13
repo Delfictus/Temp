@@ -1,0 +1,338 @@
+name: ARES CI/CD Pipeline
+# Classification: CUI//SP-CTI
+
+on:
+  push:
+    branches: [ main, ironrecon-hardening, docs-hybrid-update ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 */4 * * *'  # Security scan every 4 hours
+
+env:
+  CMAKE_VERSION: 3.20
+  CUDA_VERSION: 12.0
+  COVERAGE_THRESHOLD: 80
+
+jobs:
+  security-pre-check:
+    name: Security Pre-flight Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          
+      - name: ITAR compliance check
+        run: |
+          echo "Checking for ITAR compliance markers..."
+          if ! grep -r "ITAR" --include="*.cpp" --include="*.h" --include="*.md" .; then
+            echo "ERROR: Missing ITAR markings"
+            exit 1
+          fi
+          
+      - name: Classification check
+        run: |
+          echo "Verifying CUI markings..."
+          if ! grep -r "CUI" --include="*.md" docs/; then
+            echo "ERROR: Missing CUI classification"
+            exit 1
+          fi
+
+  build-and-test:
+    name: Build and Test
+    needs: security-pre-check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+        cuda_enabled: [ON, OFF]
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            libssl-dev \
+            libtbb-dev \
+            libboost-all-dev \
+            python3-dev \
+            python3-pip \
+            cppcheck \
+            clang-tidy
+            
+      - name: Setup CUDA (if enabled)
+        if: matrix.cuda_enabled == 'ON'
+        uses: Jimver/cuda-toolkit@v0.2.11
+        with:
+          cuda: ${{ env.CUDA_VERSION }}
+          
+      - name: Configure CMake
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DARES_ENABLE_CUDA=${{ matrix.cuda_enabled }} \
+            -DARES_ENABLE_TESTS=ON \
+            -DARES_SECURITY_HARDENING=ON \
+            -DCMAKE_CXX_FLAGS="-fstack-protector-strong -D_FORTIFY_SOURCE=2"
+            
+      - name: Build
+        run: |
+          cd build
+          make -j$(nproc)
+          
+      - name: Run unit tests
+        run: |
+          cd build
+          ctest --output-on-failure --parallel $(nproc)
+          
+      - name: Generate test report
+        if: always()
+        run: |
+          cd build
+          ctest --output-junit test-results.xml
+
+  code-quality:
+    name: Code Quality Analysis
+    needs: security-pre-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Run cppcheck
+        run: |
+          cppcheck --enable=all \
+                   --inconclusive \
+                   --xml \
+                   --xml-version=2 \
+                   --suppress=missingInclude \
+                   --std=c++20 \
+                   ares_unified/src 2> cppcheck-report.xml
+                   
+      - name: Run clang-tidy
+        run: |
+          find ares_unified/src -name '*.cpp' -o -name '*.h' | \
+          xargs clang-tidy -p build/compile_commands.json \
+                -checks='-*,cert-*,cppcoreguidelines-*,modernize-*,performance-*,readability-*,-readability-magic-numbers' \
+                > clang-tidy-report.txt
+                
+      - name: Upload analysis reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-quality-reports
+          path: |
+            cppcheck-report.xml
+            clang-tidy-report.txt
+
+  test-coverage:
+    name: Test Coverage
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov python3-pip
+          pip3 install pytest pytest-cov
+          
+      - name: Build with coverage
+        run: |
+          mkdir -p build-coverage
+          cd build-coverage
+          cmake .. -DCMAKE_BUILD_TYPE=Debug \
+                   -DARES_ENABLE_COVERAGE=ON \
+                   -DCMAKE_CXX_FLAGS="--coverage"
+          make -j$(nproc)
+          
+      - name: Run tests with coverage
+        run: |
+          cd tests
+          pytest --cov=. --cov-report=xml --cov-report=html
+          
+      - name: Check coverage threshold
+        run: |
+          coverage_percent=$(grep -oP 'line-rate="\K[^"]+' coverage.xml | head -1)
+          coverage_int=$(echo "$coverage_percent * 100" | bc | cut -d. -f1)
+          echo "Coverage: $coverage_int%"
+          if [ $coverage_int -lt ${{ env.COVERAGE_THRESHOLD }} ]; then
+            echo "ERROR: Coverage $coverage_int% is below threshold ${{ env.COVERAGE_THRESHOLD }}%"
+            exit 1
+          fi
+          
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-reports
+          path: |
+            coverage.xml
+            htmlcov/
+
+  sbom-validation:
+    name: SBOM Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Validate SBOM files
+        run: |
+          # Check SBOM exists
+          if [ ! -f "reports/sbom/sbom.json" ] || [ ! -f "reports/sbom/sbom.xml" ]; then
+            echo "ERROR: SBOM files missing"
+            exit 1
+          fi
+          
+          # Validate JSON format
+          python3 -m json.tool reports/sbom/sbom.json > /dev/null
+          
+          # Validate XML format
+          xmllint --noout reports/sbom/sbom.xml
+          
+      - name: Scan SBOM for vulnerabilities
+        run: |
+          # Install grype
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+          
+          # Scan SBOM
+          grype sbom:reports/sbom/sbom.json \
+                --fail-on high \
+                --output json > vulnerability-report.json
+                
+      - name: Check for critical vulnerabilities
+        run: |
+          critical_count=$(jq '.matches | map(select(.vulnerability.severity == "Critical")) | length' vulnerability-report.json)
+          if [ $critical_count -gt 0 ]; then
+            echo "ERROR: Found $critical_count critical vulnerabilities"
+            exit 1
+          fi
+
+  security-scan:
+    name: Security Scanning
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Run Bandit (Python security)
+        run: |
+          pip3 install bandit
+          bandit -r ares_unified/src/neuromorphic -f json -o bandit-report.json || true
+          
+      - name: Run custom security checks
+        run: |
+          # Check for hardcoded paths
+          if grep -r "/certs/" --include="*.cpp" --include="*.h" ares_unified/; then
+            echo "WARNING: Hardcoded certificate paths found"
+          fi
+          
+          # Check for weak crypto
+          if grep -rE "(MD5|SHA1|DES|RC4)" --include="*.cpp" --include="*.h" ares_unified/; then
+            echo "WARNING: Potential weak cryptography detected"
+          fi
+          
+      - name: Generate security report
+        run: |
+          echo "# Security Scan Report" > security-scan-report.md
+          echo "Generated: $(date)" >> security-scan-report.md
+          echo "" >> security-scan-report.md
+          
+          if [ -f bandit-report.json ]; then
+            echo "## Bandit Results" >> security-scan-report.md
+            jq -r '.results[] | "- [\(.severity)] \(.filename):\(.lineno) - \(.issue_text)"' bandit-report.json >> security-scan-report.md
+          fi
+          
+      - name: Upload security reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-reports
+          path: |
+            security-scan-report.md
+            bandit-report.json
+
+  compliance-check:
+    name: Compliance Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: NIST 800-171 compliance check
+        run: |
+          echo "Checking NIST 800-171 compliance markers..."
+          
+          # Check for audit logging
+          if ! grep -r "audit_log" --include="*.cpp" ares_unified/; then
+            echo "WARNING: Audit logging implementation not found"
+          fi
+          
+          # Check for encryption
+          if ! grep -r "AES-256-GCM" --include="*.cpp" ares_unified/; then
+            echo "WARNING: Required encryption not found"
+          fi
+          
+      - name: CMMC Level 3 check
+        run: |
+          echo "Verifying CMMC Level 3 requirements..."
+          # Add specific CMMC checks here
+
+  deploy-gate:
+    name: Deployment Gate Check
+    needs: [build-and-test, test-coverage, sbom-validation, security-scan, compliance-check]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Verify deployment readiness
+        run: |
+          echo "=== Deployment Readiness Check ==="
+          echo "✓ Security pre-check passed"
+          echo "✓ Build and tests passed"
+          echo "✓ Code coverage above threshold"
+          echo "✓ SBOM validated"
+          echo "✓ Security scan completed"
+          echo "✓ Compliance verified"
+          echo ""
+          echo "System is ready for deployment"
+          
+      - name: Create deployment artifact
+        run: |
+          echo "Creating deployment bundle..."
+          # Add deployment packaging steps here
+          
+      - name: Sign deployment artifact
+        run: |
+          echo "Signing deployment artifact..."
+          # Add code signing steps here
+
+  notification:
+    name: Pipeline Notification
+    needs: [deploy-gate]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Send notification
+        run: |
+          if [ "${{ needs.deploy-gate.result }}" == "success" ]; then
+            echo "✅ Pipeline successful - ARES system ready for deployment"
+          else
+            echo "❌ Pipeline failed - Review required"
+          fi

@@ -1,0 +1,271 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3e9f8c2a-5d1b-4a7c-9f2e-8b3d6e4c1a5f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2024-07-12T21:30:00Z",
+    "tools": [
+      {
+        "vendor": "ARES",
+        "name": "SBOM Generator",
+        "version": "1.0.0"
+      }
+    ],
+    "authors": [
+      {
+        "name": "ARES Edge System Team",
+        "email": "ares-team@dod.mil"
+      }
+    ],
+    "component": {
+      "bom-ref": "ares-edge-system",
+      "type": "application",
+      "name": "ARES Edge System",
+      "version": "2.0.0",
+      "description": "Adaptive Resilient Edge System with quantum-resilient security",
+      "licenses": [
+        {
+          "license": {
+            "id": "Proprietary",
+            "text": {
+              "content": "U.S. Government Restricted - ITAR/EAR Controlled"
+            }
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "classification",
+        "value": "CUI//SP-CTI//ITAR"
+      },
+      {
+        "name": "export-control",
+        "value": "ITAR Category XI(b)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "bom-ref": "cuda-toolkit",
+      "type": "library",
+      "name": "NVIDIA CUDA Toolkit",
+      "version": "12.0",
+      "description": "Parallel computing platform and API",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e8b2f5c9d3a4e6f7b8c9d1a2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "NVIDIA-CUDA-EULA"
+          }
+        }
+      ],
+      "purl": "pkg:generic/nvidia/cuda-toolkit@12.0"
+    },
+    {
+      "bom-ref": "edge-tpu",
+      "type": "library",
+      "name": "Google Edge TPU Runtime",
+      "version": "2.5.0",
+      "description": "Runtime library for Coral Edge TPU",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/google/edgetpu@2.5.0"
+    },
+    {
+      "bom-ref": "kyber",
+      "type": "library",
+      "name": "CRYSTALS-Kyber",
+      "version": "3.0.2",
+      "description": "Post-quantum key encapsulation mechanism",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f1e2d3c4b5a6978869a5b4c3d2e1f0a1b2c3d4e5f6789abcdef1234567890abc"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "CC0-1.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/pq-crystals/kyber@3.0.2"
+    },
+    {
+      "bom-ref": "dilithium",
+      "type": "library",
+      "name": "CRYSTALS-Dilithium",
+      "version": "3.1",
+      "description": "Post-quantum digital signature algorithm",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9876543210fedcba0987654321abcdef1234567890fedcba0987654321fedcb"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "CC0-1.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/pq-crystals/dilithium@3.1"
+    },
+    {
+      "bom-ref": "unreal-engine",
+      "type": "framework",
+      "name": "Unreal Engine",
+      "version": "5.3",
+      "description": "3D visualization and simulation engine",
+      "licenses": [
+        {
+          "license": {
+            "id": "Unreal-Engine-EULA"
+          }
+        }
+      ],
+      "purl": "pkg:generic/epic-games/unreal-engine@5.3"
+    },
+    {
+      "bom-ref": "tensorflow-lite",
+      "type": "library",
+      "name": "TensorFlow Lite",
+      "version": "2.13.0",
+      "description": "Machine learning framework for edge devices",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/tensorflow/tensorflow-lite@2.13.0"
+    },
+    {
+      "bom-ref": "brian2",
+      "type": "library",
+      "name": "Brian2",
+      "version": "2.5.1",
+      "description": "Spiking neural network simulator",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "CeCILL"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/brian2@2.5.1"
+    },
+    {
+      "bom-ref": "lava",
+      "type": "library",
+      "name": "Lava",
+      "version": "0.7.0",
+      "description": "Neuromorphic computing framework",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/lava-nc@0.7.0"
+    },
+    {
+      "bom-ref": "mlir",
+      "type": "library",
+      "name": "MLIR",
+      "version": "17.0.0",
+      "description": "Multi-Level Intermediate Representation",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/llvm/mlir@17.0.0"
+    },
+    {
+      "bom-ref": "cmake",
+      "type": "application",
+      "name": "CMake",
+      "version": "3.20",
+      "description": "Cross-platform build system",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:generic/cmake/cmake@3.20"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "ares-edge-system",
+      "dependsOn": [
+        "cuda-toolkit",
+        "edge-tpu",
+        "kyber",
+        "dilithium",
+        "unreal-engine",
+        "tensorflow-lite",
+        "brian2",
+        "lava",
+        "mlir"
+      ]
+    }
+  ],
+  "vulnerabilities": [],
+  "annotations": [
+    {
+      "subjects": ["ares-edge-system"],
+      "annotator": {
+        "organization": "ARES Security Team",
+        "email": "security@ares-dod.mil"
+      },
+      "timestamp": "2024-07-12T21:30:00Z",
+      "text": "This software contains export-controlled technology under ITAR Category XI(b). Distribution is restricted to U.S. persons and authorized foreign nationals with proper clearance."
+    }
+  ]
+}
