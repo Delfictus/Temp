@@ -167,11 +167,27 @@ This system is designed for authorized defense applications only. Usage is restr
 
 Export controlled under ITAR/EAR regulations.
 
-## 📞 Contact
+
+DELFICTUS I/O LLC - LOS ANGELES, CA
+-
+DoD/SBIR/STTR
+- (UEI): LXT3B9GMY4N8
+- CAGE/NCAGE: 13H70
+
+- USPTO Provisional Patent: 63/826,067   -                                                 
+System and Method for Autonomous Threat Detection and Mitigation Using a Hierarchical Cognitive Engine
+
+NAICS Codes:
+
+- 541715 – R&D in Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)
+
+- 541512 – Computer Systems Design Services
+
+- 541511 – Custom Computer Programming Services
 
 For technical inquiries related to DARPA/DoD programs, contact through official channels only.
 
 ---
 
-**ARES Edge System** - *Autonomous Defense at the Edge*  
-Version 2.0 | Codename: SnoopLion
+**ARES Edge System** - *Autonomous Resiliant Electronic Superiority*   
+Codename SnoopLion | ONLY ADVANCE!
