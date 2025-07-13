@@ -1,0 +1,57 @@
+# ARES Edge System - Python Dependencies
+# Production-grade requirements for DARPA/DoD deployment
+
+# Core Scientific Computing
+numpy>=1.24.0,<2.0.0
+scipy>=1.10.0
+
+# Neuromorphic Computing Framework
+brian2>=2.5.1
+lava-nc>=0.9.0
+
+# C++ Python Bindings
+pybind11>=2.10.0
+
+# Testing Framework
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-xdist>=3.0.0
+
+# Performance and Optimization
+numba>=0.57.0
+cython>=0.29.0
+
+# Data Processing
+pandas>=1.5.0
+h5py>=3.7.0
+
+# Machine Learning (for threat classification)
+scikit-learn>=1.2.0
+onnxruntime>=1.15.0
+
+# Configuration Management
+pyyaml>=6.0
+toml>=0.10.0
+
+# Logging and Monitoring
+structlog>=22.0.0
+
+# Security and Cryptography
+cryptography>=41.0.0
+pynacl>=1.5.0
+
+# Network and Communication
+aiohttp>=3.8.0
+grpcio>=1.54.0
+protobuf>=4.23.0
+
+# Development and Quality Assurance
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.4.0
+pre-commit>=3.3.0
+
+# Documentation
+sphinx>=7.0.0
+sphinx-rtd-theme>=1.3.0

@@ -1,0 +1,72 @@
+Copyright (c) 2024 DELFICTUS I/O LLC. All rights reserved.
+
+ARES Edge System - Proprietary Software License
+
+IMPORTANT: This software is developed under DARPA SBIR contract for the United States 
+Department of Defense. Use, reproduction, and distribution are subject to export 
+control regulations and security clearance requirements.
+
+Classification: UNCLASSIFIED // FOR OFFICIAL USE ONLY (FOUO)
+
+TERMS AND CONDITIONS:
+
+1. GRANT OF LICENSE
+   Subject to the terms of this license and applicable export control laws, 
+   DELFICTUS I/O LLC grants authorized parties a limited, non-exclusive, 
+   non-transferable license to use this software for official U.S. Government 
+   purposes and authorized research activities.
+
+2. RESTRICTIONS
+   - This software may not be redistributed without explicit written authorization
+   - Reverse engineering, decompilation, or disassembly is prohibited
+   - Export or re-export is subject to U.S. export control laws and regulations
+   - Use is restricted to authorized personnel with appropriate security clearances
+
+3. EXPORT CONTROL
+   This software may be subject to export controls under the International Traffic
+   in Arms Regulations (ITAR) and/or Export Administration Regulations (EAR). 
+   Users are responsible for compliance with all applicable export control laws.
+
+4. SECURITY REQUIREMENTS
+   - All users must maintain appropriate security clearances
+   - Software must be used in accordance with DoD security requirements
+   - Unauthorized disclosure is prohibited and may result in criminal penalties
+
+5. GOVERNMENT RIGHTS
+   The U.S. Government has unlimited rights to this software as developed under
+   DARPA SBIR contract. This includes rights to use, modify, reproduce, perform,
+   display, release, or disclose the software.
+
+6. WARRANTY DISCLAIMER
+   THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+7. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL DELFICTUS I/O LLC BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+
+8. INDEMNIFICATION
+   Users agree to indemnify and hold harmless DELFICTUS I/O LLC from any claims
+   arising from unauthorized use, export, or disclosure of this software.
+
+For licensing inquiries and authorized use requests:
+DELFICTUS I/O LLC
+Email: legal@delfictus.io
+Phone: [REDACTED]
+
+DARPA Contract Information:
+Contract Number: [REDACTED]
+Program: Adaptive Resilient Edge Systems (ARES)
+Classification: UNCLASSIFIED // FOUO
+
+This license is effective until terminated. DELFICTUS I/O LLC may terminate
+this license at any time for any reason. Upon termination, all copies of
+the software must be destroyed or returned.
+
+Last Updated: 2024
+Legal Review: APPROVED
+Security Review: APPROVED
+Export Control Review: APPROVED

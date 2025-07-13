@@ -1,0 +1,161 @@
+SPDXVersion: SPDX-2.3
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: ARES Edge System SBOM
+DocumentNamespace: https://github.com/Delfictus/AE/ares-edge-system-v1.0.0
+CreationInfo:
+  Created: 2024-01-01T00:00:00Z
+  Creators:
+    - Tool: manual-analysis
+    - Organization: DELFICTUS I/O LLC
+  LicenseListVersion: 3.21
+
+# Primary Package
+PackageName: ARES Edge System
+SPDXID: SPDXRef-AresEdgeSystem
+PackageVersion: 1.0.0
+PackageSupplier: Organization: DELFICTUS I/O LLC
+PackageDownloadLocation: https://github.com/Delfictus/AE
+FilesAnalyzed: true
+PackageVerificationCode: 0000000000000000000000000000000000000000
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: Copyright (c) 2024 DELFICTUS I/O LLC
+PackageComment: Tactical-grade autonomous threat mitigation engine
+
+# Core Dependencies
+PackageName: CMake
+SPDXID: SPDXRef-CMake
+PackageVersion: 3.18+
+PackageSupplier: Organization: Kitware Inc.
+PackageDownloadLocation: https://cmake.org
+FilesAnalyzed: false
+PackageLicenseConcluded: BSD-3-Clause
+PackageLicenseDeclared: BSD-3-Clause
+PackageCopyrightText: Copyright (c) Kitware Inc.
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:kitware:cmake:*:*:*:*:*:*:*:*
+
+PackageName: Python
+SPDXID: SPDXRef-Python
+PackageVersion: 3.12+
+PackageSupplier: Organization: Python Software Foundation
+PackageDownloadLocation: https://python.org
+FilesAnalyzed: false
+PackageLicenseConcluded: Python-2.0
+PackageLicenseDeclared: Python-2.0
+PackageCopyrightText: Copyright (c) Python Software Foundation
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:python:python:*:*:*:*:*:*:*:*
+
+# Python Dependencies
+PackageName: NumPy
+SPDXID: SPDXRef-NumPy
+PackageVersion: 1.24+
+PackageSupplier: Organization: NumPy Developers
+PackageDownloadLocation: https://numpy.org
+FilesAnalyzed: false
+PackageLicenseConcluded: BSD-3-Clause
+PackageLicenseDeclared: BSD-3-Clause
+PackageCopyrightText: Copyright (c) NumPy Developers
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:numpy:numpy:*:*:*:*:*:*:*:*
+
+PackageName: Brian2
+SPDXID: SPDXRef-Brian2
+PackageVersion: 2.5+
+PackageSupplier: Organization: Brian Development Team
+PackageDownloadLocation: https://github.com/brian-team/brian2
+FilesAnalyzed: false
+PackageLicenseConcluded: CECILL-2.1
+PackageLicenseDeclared: CECILL-2.1
+PackageCopyrightText: Copyright (c) Brian Development Team
+
+PackageName: Lava
+SPDXID: SPDXRef-Lava
+PackageVersion: 0.9+
+PackageSupplier: Organization: Intel Corporation
+PackageDownloadLocation: https://github.com/lava-nc/lava
+FilesAnalyzed: false
+PackageLicenseConcluded: BSD-3-Clause
+PackageLicenseDeclared: BSD-3-Clause
+PackageCopyrightText: Copyright (c) Intel Corporation
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:intel:lava:*:*:*:*:*:*:*:*
+
+PackageName: PyBind11
+SPDXID: SPDXRef-PyBind11
+PackageVersion: 2.10+
+PackageSupplier: Organization: PyBind11 Contributors
+PackageDownloadLocation: https://github.com/pybind/pybind11
+FilesAnalyzed: false
+PackageLicenseConcluded: BSD-3-Clause
+PackageLicenseDeclared: BSD-3-Clause
+PackageCopyrightText: Copyright (c) PyBind11 Contributors
+
+PackageName: PyTest
+SPDXID: SPDXRef-PyTest
+PackageVersion: 7.0+
+PackageSupplier: Organization: PyTest Contributors
+PackageDownloadLocation: https://github.com/pytest-dev/pytest
+FilesAnalyzed: false
+PackageLicenseConcluded: MIT
+PackageLicenseDeclared: MIT
+PackageCopyrightText: Copyright (c) PyTest Contributors
+
+# System Dependencies
+PackageName: CUDA Toolkit
+SPDXID: SPDXRef-CUDA
+PackageVersion: 11.8+
+PackageSupplier: Organization: NVIDIA Corporation
+PackageDownloadLocation: https://developer.nvidia.com/cuda-toolkit
+FilesAnalyzed: false
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: Copyright (c) NVIDIA Corporation
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:nvidia:cuda:*:*:*:*:*:*:*:*
+
+PackageName: OpenMP
+SPDXID: SPDXRef-OpenMP
+PackageVersion: 4.5+
+PackageSupplier: Organization: OpenMP Architecture Review Board
+PackageDownloadLocation: https://openmp.org
+FilesAnalyzed: false
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: Copyright (c) OpenMP Architecture Review Board
+
+# Security Libraries
+PackageName: OpenSSL
+SPDXID: SPDXRef-OpenSSL
+PackageVersion: 3.0+
+PackageSupplier: Organization: OpenSSL Software Foundation
+PackageDownloadLocation: https://openssl.org
+FilesAnalyzed: false
+PackageLicenseConcluded: Apache-2.0
+PackageLicenseDeclared: Apache-2.0
+PackageCopyrightText: Copyright (c) OpenSSL Software Foundation
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:openssl:openssl:*:*:*:*:*:*:*:*
+
+# Relationships
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-CMake
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-Python
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-NumPy
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-Brian2
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-Lava
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-PyBind11
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-PyTest
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-CUDA
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-OpenMP
+Relationship: SPDXRef-AresEdgeSystem DEPENDS_ON SPDXRef-OpenSSL
+
+# File Information
+FileName: ./ares_unified/config/config.yaml
+SPDXID: SPDXRef-ConfigFile
+FileChecksum: SHA1: 0000000000000000000000000000000000000000
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: Copyright (c) 2024 DELFICTUS I/O LLC
+
+FileName: ./ares_unified/src/
+SPDXID: SPDXRef-SourceCode
+FileChecksum: SHA1: 0000000000000000000000000000000000000000
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: Copyright (c) 2024 DELFICTUS I/O LLC

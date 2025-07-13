@@ -1,0 +1,56 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+
+# CMake build files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Documentation generated files
+docs/_build/
+docs/html/
+docs/latex/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# CUDA compilation files
+*.cubin
+*.fatbin
+*.ptx
+
+# Development files
+/tmp/
+.env
