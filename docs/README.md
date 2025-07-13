@@ -1,6 +1,6 @@
-# ARES Edge System Documentation (Codename: SnoopLion)
+# Ares Edge System - Documentation
 
-## 📚 Table of Contents
+##  Table of Contents
 
 ### Core Modules
 - [Core Module](./core.md) - Quantum-resilient foundation and system management
@@ -17,7 +17,7 @@
 - [Backscatter](./backscatter.md) - RF energy harvesting and communication
 - [Unreal Plugin](./unreal.md) - UE5 visualization and simulation
 
-## 🧠 High-Level System Overview
+##  High-Level System Overview
 
 The **ARES (Adaptive Resilient Edge System)** is a cutting-edge autonomous defense platform that combines:
 
@@ -37,7 +37,7 @@ ARES enables autonomous agents to:
 4. **Adapt and Learn** via federated learning across the swarm
 5. **Survive and Complete Missions** with self-destruct and last-man-standing protocols
 
-## 🕸️ System Architecture Summary
+## System Architecture Summary
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -86,7 +86,7 @@ ARES enables autonomous agents to:
 - **Identity + Countermeasures** ensure security and mission completion
 - **Unreal** visualizes the entire system state
 
-## 🛠️ Setup and Installation
+## Setup and Installation
 
 ### Prerequisites
 - C++20 compatible compiler (GCC 11+ or Clang 14+)
@@ -131,7 +131,7 @@ docker run --gpus all -it ares-edge-system
 docker run --device /dev/usb -it ares-edge-system
 ```
 
-## 🤝 Contribution Guidelines
+##  Contribution Guidelines
 
 ### Code Standards
 - Follow C++20 best practices
@@ -158,7 +158,7 @@ docker run --device /dev/usb -it ares-edge-system
 - Performance benchmarks for critical paths
 - Hardware-in-the-loop tests when applicable
 
-## 🔐 Security Notice
+##  Security Notice
 
 This system is designed for authorized defense applications only. Usage is restricted to:
 - U.S. Government agencies
