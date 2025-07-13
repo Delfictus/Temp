@@ -1,0 +1,8 @@
+=== ARES Performance Verification ===
+Performance Results:
+  Iterations: 10000
+  Spectrum size: 4096
+  Total time: 0 μs
+  Time per iteration: 0 μs
+  Operations per second: -2147483648
+  Real-time capable: YES
