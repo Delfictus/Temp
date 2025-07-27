@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.18)
 
 # Add all subdirectories
+add_subdirectory(algorithms)
+add_subdirectory(hardware)
+add_subdirectory(security)
 add_subdirectory(core)
 add_subdirectory(perception)
 add_subdirectory(navigation)
@@ -24,6 +27,9 @@ endif()
 # Create unified ARES library
 add_library(ares_unified INTERFACE)
 target_link_libraries(ares_unified INTERFACE
+    ares_algorithms
+    ares_hardware
+    ares_security
     ares_core
     ares_perception
     ares_navigation
