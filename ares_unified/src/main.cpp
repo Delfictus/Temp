@@ -48,8 +48,8 @@
 #include <signal.h>
 
 // Core System Headers
-#include "core/include/ares_core.h"
-#include "core/include/quantum_resilient_core.h"
+#include "core/include/quantum_resilient_core_simple.h"
+#include "core/include/quantum_resilient_core_simple.h"
 
 // Algorithm Headers  
 #include "algorithms/ares_transfer_entropy.h"

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 project(AresEdgeSystem 
     VERSION 2.0.0
     DESCRIPTION "Autonomous Reconnaissance and Electronic Supremacy Edge System"
-    LANGUAGES CXX CUDA
+    LANGUAGES CXX
 )
 
 # C++ Standard
@@ -12,9 +12,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # CUDA Configuration
-if(NOT DEFINED CMAKE_CUDA_STANDARD)
-    set(CMAKE_CUDA_STANDARD 17)
-    set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+if(ARES_ENABLE_CUDA)
+    enable_language(CUDA)
+    if(NOT DEFINED CMAKE_CUDA_STANDARD)
+        set(CMAKE_CUDA_STANDARD 17)
+        set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+    endif()
 endif()
 
 # Build options
@@ -29,8 +32,13 @@ find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
 if(ARES_ENABLE_CUDA)
-    find_package(CUDA REQUIRED)
-    find_package(CUDAToolkit REQUIRED)
+    find_package(CUDAToolkit)
+    if(CUDAToolkit_FOUND)
+        message(STATUS "CUDA Toolkit found: ${CUDAToolkit_VERSION}")
+    else()
+        message(WARNING "CUDA Toolkit not found, disabling CUDA support")
+        set(ARES_ENABLE_CUDA OFF)
+    endif()
 endif()
 
 # Compiler flags
